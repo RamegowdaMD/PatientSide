@@ -9,6 +9,8 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import DashboardPage from './pages/DashboardPage';
+import DashboardPage from './pages/DashboardPage';
+import DoctorDashboardPage from './pages/DoctorDashboardPage';
 // import VRPage from './pages/VRPage';
 
 // Import the base App CSS if you have custom styles
@@ -25,6 +27,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           {/* <Route path="/vr-experience" element={<VRPage />} /> */}
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/doctor-dashboard" element={<DoctorDashboardPage />} /> 
         </Routes>
       </Container>
     </>

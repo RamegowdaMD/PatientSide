@@ -1,10 +1,23 @@
-// src/components/AppNavbar.jsx
-import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 function AppNavbar() {
-  const isLoggedIn = true; // In a real app, this would be based on user state
+  const [userInfo, setUserInfo] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUserInfo = localStorage.getItem('userInfo');
+    if (storedUserInfo) {
+      setUserInfo(JSON.parse(storedUserInfo));
+    }
+  }, []);
+
+  const logoutHandler = () => {
+    localStorage.removeItem('userInfo');
+    setUserInfo(null);
+    navigate('/login');
+  };
 
   return (
     <Navbar bg="primary" variant="dark" expand="lg">
@@ -14,8 +27,15 @@ function AppNavbar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            {isLoggedIn ? (
-              <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+            {userInfo ? (
+              <>
+                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
+                <NavDropdown title={userInfo.name} id="username">
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/login">Login</Nav.Link>
