@@ -35,7 +35,7 @@ function AppNavbar() {
     <Navbar bg="white" expand="lg" className="shadow-sm py-2 sticky-top">
       <Container>
         <Navbar.Brand as={Link} to="/" className="navbar-brand-custom">
-          HealthConnect
+          VR HealthConnect
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -54,12 +54,14 @@ function AppNavbar() {
             </InputGroup>
           </Form>
           
+
           <Nav className="ms-auto align-items-center">
+            <Link to="https://medease-frontend-sigma.vercel.app/" size={22} className="me-2 fw-bold "  style={{ color: "black", opacity: 0.6, textDecoration: "none" }}>Pharmacy</Link>
             {userInfo ? (
               <NavDropdown 
                 title={
                   <>
-                    <FaUserCircle size={22} className="me-2" style={{ color: 'var(--primary-color)'}} />
+                    <FaUserCircle size={22} className="me-2 " style={{ color: 'var(--primary-color)'}} />
                     {userInfo.name}
                   </>
                 } 

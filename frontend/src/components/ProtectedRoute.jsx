@@ -7,8 +7,6 @@ const ProtectedRoute = ({ children }) => {
   let location = useLocation();
 
   if (!userInfo) {
-    // Redirect them to the /login page, but save the current location they were
-    // trying to go to. This is a good user experience.
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
