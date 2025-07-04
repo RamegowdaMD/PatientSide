@@ -13,6 +13,8 @@ import BookingPage from './pages/BookingPage';
 import PatientDashboard from './pages/PatientDashboard'; // Import new
 import DoctorDashboard from './pages/DoctorDashboard';   // Import new
 import ProtectedRoute, { DoctorRoute } from './components/ProtectedRoute'; // Import protectors
+import AppointmentDetailsPage from "./pages/AppointmentDetailsPage";
+import DoctorSchedulePage from './pages/DoctorSchedulePage';
 
 // Import the CSS
 import "./App.css";
@@ -31,36 +33,45 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
 
           {/* Protected Patient Route */}
-          <Route 
-            path="/dashboard" 
+          <Route
+            path="/dashboard"
             element={
               <ProtectedRoute>
                 <PatientDashboard />
               </ProtectedRoute>
-            } 
+            }
           />
 
-<Route 
-    path="/book-appointment/:doctorId" 
-    element={
-        <ProtectedRoute>
-            <BookingPage />
-        </ProtectedRoute>
-    } 
-/>
-          
+          <Route
+            path="/book-appointment/:doctorId"
+            element={
+              <ProtectedRoute>
+                <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/appointment/:appointmentId"
+            element={
+              <ProtectedRoute>
+                <AppointmentDetailsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/doctor/schedule" element={<DoctorRoute><DoctorSchedulePage /></DoctorRoute>} />
+
           {/* Protected Doctor Route */}
-          <Route 
-            path="/doctor-dashboard" 
+          <Route
+            path="/doctor-dashboard"
             element={
               <DoctorRoute>
                 <DoctorDashboard />
               </DoctorRoute>
-            } 
+            }
           />
-          
+
           {/* Add a fallback route for any other path */}
-          <Route path="*" element={<HomePage />} /> 
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
     </>
