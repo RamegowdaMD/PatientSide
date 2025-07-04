@@ -82,5 +82,37 @@ const updateAppointment = async (req, res) => {
     }
 };
 
+const getAppointmentById = async (req, res) => {
+  try {
+    const appointment = await Appointment.findById(req.params.id)
+      .populate('patient', 'name email')
+      .populate('doctor', 'name email specialty image'); // Populate doctor details
 
-module.exports = { createAppointment, getDoctorAppointments, getPatientAppointments, updateAppointment };
+    if (!appointment) {
+      return res.status(404).json({ message: 'Appointment not found' });
+    }
+
+    // Security Check: Ensure the logged-in user is part of this appointment
+    if (
+      appointment.patient._id.toString() !== req.user._id.toString() &&
+      appointment.doctor._id.toString() !== req.user._id.toString()
+    ) {
+      return res.status(401).json({ message: 'Not authorized to view this appointment' });
+    }
+
+    res.json(appointment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
+// Make sure to export the new function
+module.exports = { 
+  createAppointment, 
+  getDoctorAppointments, 
+  getPatientAppointments, 
+  updateAppointment, 
+  getAppointmentById // <-- ADD THIS
+};

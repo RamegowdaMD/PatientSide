@@ -6,12 +6,16 @@ const {
   getDoctorAppointments,
   getPatientAppointments,
   updateAppointment,
+  getAppointmentById,
 } = require('../controllers/appointmentController');
 const { protect } = require('../middleware/authMiddleware'); // Assuming you have this file
 
 router.route('/').post(protect, createAppointment);
 router.route('/doctor').get(protect, getDoctorAppointments);
 router.route('/patient').get(protect, getPatientAppointments);
-router.route('/:id').put(protect, updateAppointment);
+router.route('/:id')
+  .get(protect, getAppointmentById)
+  .put(protect, updateAppointment);
+  
 
 module.exports = router;

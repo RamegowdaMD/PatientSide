@@ -1,25 +1,24 @@
-
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 // Import your components and pages
-import AppNavbar from './components/AppNavbar';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import BookingPage from './pages/BookingPage';
-import PatientDashboard from './pages/PatientDashboard'; // Import new
-import DoctorDashboard from './pages/DoctorDashboard';   // Import new
-import ProtectedRoute, { DoctorRoute } from './components/ProtectedRoute'; // Import protectors
+import AppNavbar from "./components/AppNavbar";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import BookingPage from "./pages/BookingPage";
+import PatientDashboard from "./pages/PatientDashboard"; // Import new
+import DoctorDashboard from "./pages/DoctorDashboard"; // Import new
+import ProtectedRoute, { DoctorRoute } from "./components/ProtectedRoute";
+import AppointmentDetailsPage from "./pages/AppointmentDetailsPage"; // Import protectors
 
 // Import the CSS
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
-<>
+    <>
       <AppNavbar />
       <main>
         {/* We remove the Container from here to allow pages to control their own layout (e.g. fluid containers) */}
@@ -30,39 +29,48 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
 
           {/* Protected Patient Route */}
-          <Route 
-            path="/dashboard" 
+          <Route
+            path="/dashboard"
             element={
               <ProtectedRoute>
                 <PatientDashboard />
               </ProtectedRoute>
-            } 
+            }
           />
 
-<Route 
-    path="/book-appointment/:doctorId" 
-    element={
-        <ProtectedRoute>
-            <BookingPage />
-        </ProtectedRoute>
-    } 
-/>
-          
+          <Route
+            path="/book-appointment/:doctorId"
+            element={
+              <ProtectedRoute>
+                <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/appointment/:appointmentId"
+            element={
+              <ProtectedRoute>
+                <AppointmentDetailsPage />
+              </ProtectedRoute>
+            }
+          />
+
           {/* Protected Doctor Route */}
-          <Route 
-            path="/doctor-dashboard" 
+          <Route
+            path="/doctor-dashboard"
             element={
               <DoctorRoute>
                 <DoctorDashboard />
               </DoctorRoute>
-            } 
+            }
           />
-          
+
           {/* Add a fallback route for any other path */}
-          <Route path="*" element={<HomePage />} /> 
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </main>
-      </>
+    </>
   );
 }
 
