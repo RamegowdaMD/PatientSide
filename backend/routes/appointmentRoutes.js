@@ -25,6 +25,7 @@ const {
   getPatientAppointments,
   updateAppointment,
   getDoctorConfirmedAppointments, // <-- IMPORT THE NEW FUNCTION
+  getAppointmentById,
 } = require('../controllers/appointmentController');
 const { protect, isDoctor } = require('../middleware/authMiddleware'); // <-- IMPORT isDoctor
 
@@ -39,5 +40,9 @@ router.route('/doctor').get(protect, isDoctor, getDoctorAppointments);
 
 router.route('/patient').get(protect, getPatientAppointments);
 router.route('/:id').put(protect, isDoctor, updateAppointment);
+router.route('/:id')
+  .get(protect, getAppointmentById)
+  .put(protect, updateAppointment);
+  
 
 module.exports = router;
