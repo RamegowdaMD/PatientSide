@@ -6,7 +6,7 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-// --- MODIFIED registerUser ---
+
 const registerUser = async (req, res) => {
   // Destructure role from the request body
   const { name, email, password, role } = req.body;
@@ -64,4 +64,30 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+// const getDoctors = async (req, res) => {
+//   try {
+   
+//     const doctors = await User.find({ role: 'doctor' }).select('-password');
+    
+//     // If no doctors are found, it will correctly return an empty array []
+//     res.json(doctors);
+
+//   } catch (error) {
+//     console.error(error); // Log the error for debugging
+//     res.status(500).json({ message: 'Server Error: ' + error.message });
+//   }
+// };
+
+const getDoctors = async (req, res) => {
+  console.log("GET /api/users/doctors called"); // <== DEBUG LOG
+  try {
+    const doctors = await User.find({ role: 'doctor' }).select('-password');
+    res.json(doctors);
+  } catch (error) {
+    console.error("Error fetching doctors:", error);
+    res.status(500).json({ message: 'Server Error: ' + error.message });
+  }
+};
+
+
+module.exports = { registerUser, loginUser, getDoctors };

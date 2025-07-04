@@ -7,7 +7,6 @@ const doctorSchema = mongoose.Schema(
     qualifications: { type: String, required: true },
     experienceInYears: { type: Number, required: true, default: 0 },
     consultationFee: { type: Number, required: true },
-    // We can add availability, ratings, etc. later
   },
   {
     timestamps: true,
