@@ -20,12 +20,11 @@ import DoctorSchedulePage from './pages/DoctorSchedulePage';
 import "./App.css";
 
 function App() {
-  // This component now lives INSIDE the BrowserRouter from main.jsx
   return (
     <>
       <AppNavbar />
       <main>
-        {/* The Routes component will work perfectly now because it's within a Router context */}
+        {/* We remove the Container from here to allow pages to control their own layout (e.g. fluid containers) */}
         <Routes>
           {/* Public Routes */}
           <Route path="/" element={<HomePage />} />
