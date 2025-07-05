@@ -1,20 +1,19 @@
-
-
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 // Import your components and pages
-import AppNavbar from './components/AppNavbar';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import BookingPage from './pages/BookingPage';
-import PatientDashboard from './pages/PatientDashboard'; // Import new
-import DoctorDashboard from './pages/DoctorDashboard';   // Import new
-import ProtectedRoute, { DoctorRoute } from './components/ProtectedRoute'; // Import protectors
+import AppNavbar from "./components/AppNavbar";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import BookingPage from "./pages/BookingPage";
+import PatientDashboard from "./pages/PatientDashboard"; // Import new
+import DoctorDashboard from "./pages/DoctorDashboard"; // Import new
+import ProtectedRoute, { DoctorRoute } from "./components/ProtectedRoute"; // Import protectors
 import AppointmentDetailsPage from "./pages/AppointmentDetailsPage";
-import DoctorSchedulePage from './pages/DoctorSchedulePage';
+import DoctorSchedulePage from "./pages/DoctorSchedulePage";
+import DoctorCallPage from "./pages/DoctorCallPage";
 
 // Import the CSS
 import "./App.css";
@@ -57,7 +56,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/doctor/schedule" element={<DoctorRoute><DoctorSchedulePage /></DoctorRoute>} />
+          <Route
+            path="/doctor/schedule"
+            element={
+              <DoctorRoute>
+                <DoctorSchedulePage />
+              </DoctorRoute>
+            }
+          />
 
           {/* Protected Doctor Route */}
           <Route
@@ -67,6 +73,10 @@ function App() {
                 <DoctorDashboard />
               </DoctorRoute>
             }
+          />
+          <Route
+            path="/doctor/call/:appointmentId"
+            element={<DoctorCallPage />}
           />
 
           {/* Add a fallback route for any other path */}

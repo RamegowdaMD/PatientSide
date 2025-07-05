@@ -1,5 +1,5 @@
 
-// backend/controllers/appointmentController.js
+
 
 const Appointment = require('../models/appointmentModel');
 const User = require('../models/userModel');
