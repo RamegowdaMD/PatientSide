@@ -6,14 +6,13 @@ const {
   getDoctorAppointments,
   getPatientAppointments,
   updateAppointment,
-  getDoctorConfirmedAppointments, // <-- IMPORT THE NEW FUNCTION
+  getDoctorConfirmedAppointments, 
   getAppointmentById,
 } = require('../controllers/appointmentController');
 const { protect, isDoctor } = require('../middleware/authMiddleware'); // <-- IMPORT isDoctor
 
 router.route('/').post(protect, createAppointment);
 
-// <-- ADD THE NEW ROUTE HERE -->
 // This route is for getting only confirmed appointments for the logged-in doctor's schedule
 router.route('/doctor/confirmed').get(protect, isDoctor, getDoctorConfirmedAppointments);
 
