@@ -6,7 +6,6 @@ const connectDB = require('./config/db');
 
 
 const userRoutes = require('./routes/userRoutes');
-const doctorRoutes = require('./routes/doctorRoutes');
 const prescriptionRoutes = require('./routes/prescriptionRoutes');
 const vrRoutes = require('./routes/vrRoutes');
 const  appointmentRoutes = require('./routes/appointmentRoutes')
